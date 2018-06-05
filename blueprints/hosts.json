@@ -1,5 +1,5 @@
 {
-    "blueprint":"jarvis",
+    "blueprint":"lab",
     "default_password":"admin",
     "host_groups":[
       { 

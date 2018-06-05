@@ -12,7 +12,7 @@ services:
         ipv4_address: 10.1.0.10
 
   namenode:
-    image: amarmesic/hdp-ambari-agent
+    image: amarmesic/hdp-namenode
     hostname: namenode
     container_name: namenode
     ports:
@@ -23,7 +23,7 @@ services:
         ipv4_address: 10.1.0.11
 
   resourcemanager:
-    image: amarmesic/hdp-ambari-agent
+    image: amarmesic/hdp-resourcemanager
     hostname: resourcemanager
     container_name: resourcemanager
     ports:
@@ -35,7 +35,7 @@ services:
         ipv4_address: 10.1.0.12
 
   master:
-    image: amarmesic/hdp-ambari-agent
+    image: amarmesic/hdp-master
     hostname: master
     container_name: master
     ports:
@@ -46,7 +46,7 @@ services:
         ipv4_address: 10.1.0.13
   
   node1:
-    image: amarmesic/hdp-ambari-agent
+    image: amarmesic/hdp-datanode
     hostname: node1
     container_name: node1
     privileged: false
@@ -55,7 +55,7 @@ services:
         ipv4_address: 10.1.0.14
 
   node2:
-    image: amarmesic/hdp-ambari-agent
+    image: amarmesic/hdp-datanode
     hostname: node2
     container_name: node2
     privileged: false
@@ -64,7 +64,7 @@ services:
         ipv4_address: 10.1.0.15
 
   node3:
-    image: amarmesic/hdp-ambari-agent
+    image: amarmesic/hdp-datanode
     hostname: node3
     container_name: node3
     privileged: false

@@ -1,0 +1,2 @@
+#VERSION_NUMBER=2.6.2.0-155
+deb http://public-repo-1.hortonworks.com/ambari/ubuntu16/2.x/updates/2.6.2.0 Ambari main

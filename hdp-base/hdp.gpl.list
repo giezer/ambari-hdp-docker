@@ -1,0 +1,2 @@
+#VERSION_NUMBER=2.6.5.0-292
+deb http://public-repo-1.hortonworks.com/HDP-GPL/ubuntu16/2.x/updates/2.6.5.0 HDP-GPL main

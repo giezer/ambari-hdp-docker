@@ -3,14 +3,32 @@ LABEL author="Amar Mesic"
 LABEL version="0.1"
 
 # Setup repos and install pre-requisites
+ENV LANG C.UTF-8
 RUN apt-get -qq update
-RUN apt-get update && apt-get install wget ntp net-tools inetutils-ping curl ssh vim python telnet lsof less -y
+RUN apt-get update && apt-get install wget ntp dnsutils net-tools inetutils-ping curl ssh vim python telnet lsof less apt-utils -y
+RUN apt-get update && apt-get install -y \
+		bzip2 \
+		unzip \
+		xz-utils \
+&& rm -rf /var/lib/apt/lists/*
+RUN mkdir /usr/java/
+RUN chmod a+x  /usr/java/
+RUN mkdir /usr/jdk64/
+RUN chmod a+x /usr/jdk64/
+RUN wget http://public-repo-1.hortonworks.com/ARTIFACTS/jdk-8u112-linux-x64.tar.gz -O /tmp/jdk-8u112-linux-x64.tar.gz
+RUN tar --no-same-owner -xzvf /tmp/jdk-8u112-linux-x64.tar.gz /usr/jdk64
+RUN chmod -r 644 /usr/jdk64/
+RUN ln -s /usr/jdk64/jdk1.8.0_112 /usr/java/default
+ENV JAVA_HOME=/usr/jdk64/jdk1.8.0_112
 
 # Add HDP and Ambari repos
-RUN wget -O /etc/apt/sources.list.d/ambari.list http://public-repo-1.hortonworks.com/ambari/ubuntu16/2.x/updates/2.6.0.0/ambari.list
-RUN wget -O /etc/apt/sources.list.d/hdp.list http://public-repo-1.hortonworks.com/HDP/ubuntu16/2.x/updates/2.6.3.0/hdp.list
+ADD ambari.list /etc/apt/sources.list.d/ 
+ADD hdp.list /etc/apt/sources.list.d/ 
+ADD hdp.gpl.list /etc/apt/sources.list.d/ 
+ADD hdf.list /etc/apt/sources.list.d/ 
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys B9733A7A07513CAD
 RUN apt-get update
+WORKDIR /tmp
 
 # Create directories
 RUN mkdir /root/.ssh && mkdir /root/scripts && mkdir /root/config

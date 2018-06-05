@@ -1,4 +1,7 @@
-Dockerfiles and Docker Compose for setting up an multi-node HDP Cluster with Ambari 2.6. Docker images are based on Ubuntu 16.04. Optionally, you can boostrap HDP installation with Ambari blueprints.
+Dockerfiles and Docker Compose for setting up an multi-node HDP Cluster with Ambari 2.6. Docker images are based on Ubuntu 16.04. 
+
+Included the ambari shell for the automatic creation of the cluster and installation of the components according to the blueprint.
+More about ambari shell https://github.com/hortonworks/ambari-shell
 
 Requires Docker > v1.13 and Docker Compose > v1.17
 
@@ -13,10 +16,19 @@ cd hdp-base
 docker build -t amarmesic/hdp-base:latest .
 ```
 
-2. Build Ambari Agent Image
+2. Build Ambari Agents Images
 ```
-cd hdp-ambari-agent
-docker build -t amarmesic/hdp-ambari-agent:latest .
+cd hdp-ambari-agent-datanode
+docker build -t amarmesic/hdp-datanode:latest .
+cd hdp-ambari-agent-namenode
+docker build -t amarmesic/hdp-namenode:latest .
+cd hdp-ambari-agent-resourcemanager
+docker build -t amarmesic/hdp-resourcemanager:latest .
+cd hdp-ambari-agent-master
+docker build -t amarmesic/hdp-master:latest .
+
+The build of the images has been separated because the binaries are already installed, so the installation of the components is faster.
+
 ```
 
 3. Build Ambari Server Image
@@ -32,20 +44,6 @@ docker-compose up -d
 ```
 It will take about a minute until Ambari is available on port 8080
 
-## Optional: Install HDP 2.6 using Ambari Blueprints
-Change the working directory to `blueprints`
-
-1. Register blueprint
-```
-curl -H "X-Requested-By: ambari" -X POST -u admin:admin http://<AMBARIHOST>:8080/api/v1/blueprints/<CLUSTERNAME> -d @blueprint.json
-```
-
-2. Start deployment
-
-Below comand will start cluster deployment
-
-```
-curl -H "X-Requested-By: ambari" -X POST -u admin:admin http://<AMBARHOST>:8080/api/v1/clusters/<CLUSTERNAME> -d @hosts.json
 ```
 
 ## Passwords

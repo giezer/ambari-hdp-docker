@@ -1,0 +1,3 @@
+#VERSION_NUMBER=3.1.1.0-35
+deb http://public-repo-1.hortonworks.com/HDF/ubuntu16/3.x/updates/3.1.1.0 HDF main
+deb http://public-repo-1.hortonworks.com/HDP-UTILS-1.1.0.21/repos/ubuntu16 HDP-UTILS main
