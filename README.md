@@ -46,6 +46,20 @@ It will take about a minute until Ambari is available on port 8080
 
 ```
 
+## Run in rancher
+This compose rolled into the rancher. Hence the change in the container names of the original project. 
+The rancher does not accept special characters in container names.
+In the rancher docker-compose also does not need the network it already does this automatically. 
+Because of this the dynamic creation of the containers' hosts file was done.
+
+More about rancher https://github.com/rancher/rancher
+
+```
+It will take about a minute until Ambari is available on port 8080
+
+```
+
+
 ## Passwords
 
 Admin/Database password for all services is `hadoop`
